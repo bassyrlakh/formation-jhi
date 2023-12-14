@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="compteur">
+      <h2 data-cy="compteurDetailsHeading"><span>Compteur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id</span></dt>
+        <dd>
+          <span>{{ compteur.id }}</span>
+        </dd>
+        <dt><span>Numero</span></dt>
+        <dd>
+          <span>{{ compteur.numero }}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+          <span>{{ compteur.type }}</span>
+        </dd>
+        <dt><span>Phase</span></dt>
+        <dd>
+          <span>{{ compteur.phase }}</span>
+        </dd>
+        <dt><span>Date Dernier Achat</span></dt>
+        <dd>
+          <span>{{ compteur.dateDernierAchat | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Fabricant</span></dt>
+        <dd>
+          <span>{{ compteur.fabricant }}</span>
+        </dd>
+        <dt><span>Cumul Energie Mensuelle</span></dt>
+        <dd>
+          <span>{{ compteur.cumulEnergieMensuelle }}</span>
+        </dd>
+        <dt><span>Client</span></dt>
+        <dd>
+          <div *ngIf="compteur.client">
+            <a [routerLink]="['/client', compteur.client.id, 'view']">{{ compteur.client.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Translation missing for entity.action.back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/compteur', compteur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>editer</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,6 @@
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Actualiser la liste</span>
       </button>
       <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']">
         <fa-icon icon="plus"></fa-icon> <span>Créer un nouvel utilisateur</span>

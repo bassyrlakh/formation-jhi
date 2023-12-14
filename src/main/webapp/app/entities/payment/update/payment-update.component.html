@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-payment-heading" data-cy="PaymentCreateUpdateHeading">Créer ou éditer un Payment</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_paymentDate">Payment Date</label>
+          <div class="d-flex">
+            <input
+              id="field_paymentDate"
+              data-cy="paymentDate"
+              type="datetime-local"
+              class="form-control"
+              name="paymentDate"
+              formControlName="paymentDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_paymentMode">Payment Mode</label>
+          <select class="form-control" name="paymentMode" formControlName="paymentMode" id="field_paymentMode" data-cy="paymentMode">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let paiementMode of paiementModeValues" [value]="paiementMode">{{ paiementMode }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_facture">Facture</label>
+          <select
+            class="form-control"
+            id="field_facture"
+            data-cy="facture"
+            name="facture"
+            formControlName="facture"
+            [compareWith]="compareFacture"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="factureOption" *ngFor="let factureOption of facturesSharedCollection">{{ factureOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>retour</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>valider</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

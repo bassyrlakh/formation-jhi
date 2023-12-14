@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="client">
+      <h2 data-cy="clientDetailsHeading"><span>Client</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id</span></dt>
+        <dd>
+          <span>{{ client.id }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ client.lastName }}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ client.firstName }}</span>
+        </dd>
+        <dt><span>Date Ofbirth</span></dt>
+        <dd>
+          <span>{{ client.dateOfbirth | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Translation missing for entity.action.back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client', client.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>editer</span>
+      </button>
+    </div>
+  </div>
+</div>

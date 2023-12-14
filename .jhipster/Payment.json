@@ -1,0 +1,29 @@
+{
+  "applications": "*",
+  "changelogDate": "20231208190622",
+  "dto": "mapstruct",
+  "entityTableName": "payment",
+  "fields": [
+    {
+      "fieldName": "paymentDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "paymentMode",
+      "fieldType": "PaiementMode",
+      "fieldValues": "ORANGEMONEY,WAVE,SENELECMONEY"
+    }
+  ],
+  "name": "Payment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "facture",
+      "relationshipName": "facture",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

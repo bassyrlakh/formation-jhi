@@ -5,44 +5,118 @@
 /* ==========================================================================
 Navbar
 ========================================================================== */
+// $navbar-dark-color: #ccc;
+
+@media (min-width: 991.98px) {
+  main {
+    padding-left: 240px;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: -50px;
+  bottom: 0;
+  left: 0;
+  padding: 58px 0 0; /* Height of navbar */
+  box-shadow:
+    0 2px 5px 0 rgb(0 0 0 / 5%),
+    0 2px 10px 0 rgb(0 0 0 / 5%);
+  width: 240px;
+  z-index: 1600;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+.sidebar .active {
+  border-radius: 5px;
+  box-shadow:
+    0 2px 5px 0 rgb(0 0 0 / 16%),
+    0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
 
 .navbar-version {
   font-size: 0.65em;
-  color: $navbar-dark-color;
+  color: #fff;
 }
 
+.btn-outline-success {
+  all: none;
+}
 .profile-image {
   height: 1.75em;
   width: 1.75em;
 }
 
+.bg-light {
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
 .navbar {
   padding: 0.2rem 1rem;
-  .dropdown-item.active,
-  .dropdown-item.active:focus,
-  .dropdown-item.active:hover {
-    background-color: $dark;
-  }
+  color: black;
+  // width: calc(100% - 20%);
+  margin-top: 10px;
+  // margin-left: calc(100% - 80%);
+  border-radius: 5px;
+  // .dropdown-item.active,
+  // .dropdown-item.active:focus,
+  // .dropdown-item.active:hover {
+  //   background-color: $dark;
+  // }
 
-  a.nav-link {
-    font-weight: 400;
-  }
+  // a.nav-link {
+  //   font-weight: 400;
+  // }
 
-  .navbar-toggler {
-    &:hover {
-      color: $navbar-dark-hover-color;
-    }
-  }
+  // .navbar-toggler {
+  //   &:hover {
+  //     color: $navbar-dark-hover-color;
+  //   }
+  // }
 }
 
 /* ==========================================================================
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 85px;
+  width: 85px;
+  z-index: 1800;
+  display: block;
+  margin: 0 auto;
   display: inline-block;
-  vertical-align: middle;
-  background: url('/content/images/logo-jhipster.png') no-repeat center center;
+  // vertical-align: middle;
+  background: url('/content/images/logo-senelec.png') no-repeat center center;
   background-size: contain;
+}
+.list-group-item {
+  border: none !important;
+  margin-top: 5px;
+}
+
+.button-logout {
+  position: absolute;
+  left: 0px;
+  bottom: 10px;
+  width: 95%;
+  border: none;
+  display: flex;
+  margin: 0 2.5%;
+  border-color: aqua;
+  justify-content: center;
+  align-items: center;
 }

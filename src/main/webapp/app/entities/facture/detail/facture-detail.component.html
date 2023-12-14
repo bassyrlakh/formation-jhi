@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="facture">
+      <h2 data-cy="factureDetailsHeading"><span>Facture</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id</span></dt>
+        <dd>
+          <span>{{ facture.id }}</span>
+        </dd>
+        <dt><span>Numero Facture</span></dt>
+        <dd>
+          <span>{{ facture.numeroFacture }}</span>
+        </dd>
+        <dt><span>Date Facture</span></dt>
+        <dd>
+          <span>{{ facture.dateFacture | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Date Echeance</span></dt>
+        <dd>
+          <span>{{ facture.dateEcheance | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Montant Facture</span></dt>
+        <dd>
+          <span>{{ facture.montantFacture }}</span>
+        </dd>
+        <dt><span>Cons Tot</span></dt>
+        <dd>
+          <span>{{ facture.consTot }}</span>
+        </dd>
+        <dt><span>Compteur</span></dt>
+        <dd>
+          <div *ngIf="facture.compteur">
+            <a [routerLink]="['/compteur', facture.compteur.id, 'view']">{{ facture.compteur.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Translation missing for entity.action.back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/facture', facture.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>editer</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -29,9 +29,13 @@ export default class HomeComponent implements OnInit, OnDestroy {
       .getAuthenticationState()
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
+    if (this.account == null) {
+      this.login();
+    }
   }
 
   login(): void {
+    this.ngOnDestroy();
     this.router.navigate(['/login']);
   }
 

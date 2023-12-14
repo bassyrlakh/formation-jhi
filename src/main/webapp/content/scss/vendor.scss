@@ -12,3 +12,34 @@ eg $input-color: red;
 @import 'bootswatch/dist/lux/bootswatch';
 
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */
+.table > .thead > .tr {
+  background-color: #000 !important;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  padding: none !important;
+}
+#field_dateOfbirth {
+  height: 47px !important;
+  margin-right: 10px;
+}
+
+#cancel-save {
+  border: 1px solid #000;
+}
+.box-search {
+  width: calc(50vh);
+  margin-right: 10px;
+}
+
+.action-table {
+  margin-top: 30px;
+}
+// .div-filter{
+//     width: 100px;
+// }

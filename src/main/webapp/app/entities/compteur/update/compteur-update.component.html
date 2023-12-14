@@ -1,0 +1,112 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-compteur-heading" data-cy="CompteurCreateUpdateHeading">Créer ou éditer un Compteur</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numero">Numero</label>
+          <input type="text" class="form-control" name="numero" id="field_numero" data-cy="numero" formControlName="numero" />
+          <div *ngIf="editForm.get('numero')!.invalid && (editForm.get('numero')!.dirty || editForm.get('numero')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('numero')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+          <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('type')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phase">Phase</label>
+          <input type="number" class="form-control" name="phase" id="field_phase" data-cy="phase" formControlName="phase" />
+          <div *ngIf="editForm.get('phase')!.invalid && (editForm.get('phase')!.dirty || editForm.get('phase')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('phase')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+            <small class="form-text text-danger" [hidden]="!editForm.get('phase')?.errors?.number"
+              >Translation missing for entity.validation.number</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDernierAchat">Date Dernier Achat</label>
+          <div class="d-flex">
+            <input
+              id="field_dateDernierAchat"
+              data-cy="dateDernierAchat"
+              type="datetime-local"
+              class="form-control"
+              name="dateDernierAchat"
+              formControlName="dateDernierAchat"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fabricant">Fabricant</label>
+          <input type="text" class="form-control" name="fabricant" id="field_fabricant" data-cy="fabricant" formControlName="fabricant" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cumulEnergieMensuelle">Cumul Energie Mensuelle</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cumulEnergieMensuelle"
+            id="field_cumulEnergieMensuelle"
+            data-cy="cumulEnergieMensuelle"
+            formControlName="cumulEnergieMensuelle"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_client">Client</label>
+          <select
+            class="form-control"
+            id="field_client"
+            data-cy="client"
+            name="client"
+            formControlName="client"
+            [compareWith]="compareClient"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="clientOption" *ngFor="let clientOption of clientsSharedCollection">{{ clientOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>retour</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>valider</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

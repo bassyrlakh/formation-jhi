@@ -1,0 +1,113 @@
+<div>
+  <h2 id="page-heading" data-cy="PaymentHeading">
+    <span>Payments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-payment"
+        [routerLink]="['/payment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Payment</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="payments?.length === 0">
+    <span>Aucun Payment trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="payments && payments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="paymentDate">
+            <div class="d-flex">
+              <span>Payment Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="paymentMode">
+            <div class="d-flex">
+              <span>Payment Mode</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="facture.id">
+            <div class="d-flex">
+              <span>Facture</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/payment', payment.id, 'view']">{{ payment.id }}</a>
+          </td>
+          <td>{{ payment.paymentDate | formatMediumDatetime }}</td>
+          <td>{{ payment.paymentMode }}</td>
+          <td>
+            <div *ngIf="payment.facture">
+              <a [routerLink]="['/facture', payment.facture.id, 'view']">{{ payment.facture.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/payment', payment.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">voir</span>
+              </a>
+
+              <a [routerLink]="['/payment', payment.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">editer</span>
+              </a>
+
+              <button type="submit" (click)="delete(payment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">suprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="payments && payments.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

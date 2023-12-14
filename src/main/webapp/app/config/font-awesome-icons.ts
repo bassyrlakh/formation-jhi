@@ -33,6 +33,7 @@ import {
   faTimes,
   faTrashAlt,
   faUser,
+  faFileInvoice,
   faUserPlus,
   faUsers,
   faUsersCog,
@@ -42,6 +43,7 @@ import {
 
 export const fontAwesomeIcons = [
   faArrowLeft,
+  faFileInvoice,
   faAsterisk,
   faBan,
   faBars,

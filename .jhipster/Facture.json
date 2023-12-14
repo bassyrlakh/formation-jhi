@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20231208190522",
+  "dto": "mapstruct",
+  "entityTableName": "facture",
+  "fields": [
+    {
+      "fieldName": "numeroFacture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateFacture",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateEcheance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "montantFacture",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "consTot",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "Facture",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "compteur",
+      "relationshipName": "compteur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,6 +1,7 @@
 package com.senelec.formation.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 import com.senelec.formation.IntegrationTest;
 import com.senelec.formation.domain.User;

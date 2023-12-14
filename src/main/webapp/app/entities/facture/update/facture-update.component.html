@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-facture-heading" data-cy="FactureCreateUpdateHeading">Créer ou éditer un Facture</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numeroFacture">Numero Facture</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numeroFacture"
+            id="field_numeroFacture"
+            data-cy="numeroFacture"
+            formControlName="numeroFacture"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateFacture">Date Facture</label>
+          <div class="input-group">
+            <input
+              id="field_dateFacture"
+              data-cy="dateFacture"
+              type="text"
+              class="form-control"
+              name="dateFacture"
+              ngbDatepicker
+              #dateFactureDp="ngbDatepicker"
+              formControlName="dateFacture"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateFactureDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateEcheance">Date Echeance</label>
+          <div class="input-group">
+            <input
+              id="field_dateEcheance"
+              data-cy="dateEcheance"
+              type="text"
+              class="form-control"
+              name="dateEcheance"
+              ngbDatepicker
+              #dateEcheanceDp="ngbDatepicker"
+              formControlName="dateEcheance"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateEcheanceDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_montantFacture">Montant Facture</label>
+          <input
+            type="number"
+            class="form-control"
+            name="montantFacture"
+            id="field_montantFacture"
+            data-cy="montantFacture"
+            formControlName="montantFacture"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_consTot">Cons Tot</label>
+          <input type="number" class="form-control" name="consTot" id="field_consTot" data-cy="consTot" formControlName="consTot" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_compteur">Compteur</label>
+          <select
+            class="form-control"
+            id="field_compteur"
+            data-cy="compteur"
+            name="compteur"
+            formControlName="compteur"
+            [compareWith]="compareCompteur"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="compteurOption" *ngFor="let compteurOption of compteursSharedCollection">{{ compteurOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>retour</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>valider</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

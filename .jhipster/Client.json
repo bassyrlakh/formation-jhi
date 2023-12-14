@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20231208190322",
+  "dto": "mapstruct",
+  "entityTableName": "client",
+  "fields": [
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateOfbirth",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Client",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

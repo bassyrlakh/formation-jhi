@@ -1,0 +1,49 @@
+
+
+
+entity Client{
+lastName String required,
+firstName String required,
+dateOfbirth LocalDate
+}
+
+entity Compteur{
+numero String unique required,
+type String unique required,
+phase Integer  required,
+dateDernierAchat Instant
+fabricant String,
+cumulEnergieMensuelle Double
+}
+
+
+entity Facture{
+ numeroFacture String,
+ dateFacture LocalDate,
+ dateEcheance LocalDate,
+ montantFacture BigDecimal,
+ consTot Double
+}
+
+entity Payment{
+paymentDate Instant,
+paymentMode PaiementMode
+}
+
+enum PaiementMode{
+ORANGEMONEY,
+WAVE,
+SENELECMONEY
+}
+
+
+relationship ManyToOne{
+ Compteur{Client} to  Client
+ Facture{Compteur} to  Compteur
+ Payment{Facture} to  Facture
+}
+
+paginate * with pagination
+dto * with mapstruct
+service all with serviceImpl
+

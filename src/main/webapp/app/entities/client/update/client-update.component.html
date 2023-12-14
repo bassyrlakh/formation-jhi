@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-client-heading" data-cy="ClientCreateUpdateHeading">Créer ou éditer un Client</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+          <div *ngIf="editForm.get('lastName')!.invalid && (editForm.get('lastName')!.dirty || editForm.get('lastName')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('lastName')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+          <div *ngIf="editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('firstName')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateOfbirth">Date Ofbirth</label>
+          <div class="input-group">
+            <input
+              id="field_dateOfbirth"
+              data-cy="dateOfbirth"
+              type="text"
+              class="form-control"
+              name="dateOfbirth"
+              ngbDatepicker
+              #dateOfbirthDp="ngbDatepicker"
+              formControlName="dateOfbirth"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateOfbirthDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>retour</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>valider</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

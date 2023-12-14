@@ -1,11 +1,12 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
+<!-- <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark"> -->
+<!-- <nav *ngIf="account !== null" data-cy="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
       <span class="navbar-title">Formation</span>
       <span class="navbar-version">{{ version }}</span>
-    </a>
-    <a
+    </a> -->
+<!-- <a
       class="navbar-toggler d-lg-none"
       href="javascript:void(0);"
       data-toggle="collapse"
@@ -16,8 +17,8 @@
       (click)="toggleNavbar()"
     >
       <fa-icon icon="bars"></fa-icon>
-    </a>
-    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
+    </a> -->
+<!-- <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
@@ -27,7 +28,7 @@
             </span>
           </a>
         </li>
-        <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+        jhipster-needle-add-element-to-menu - JHipster will add new menu items here
         <li
           *ngSwitchCase="true"
           ngbDropdown
@@ -43,7 +44,55 @@
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-            <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/client"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>Client</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/compteur"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>Compteur</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/facture"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>Facture</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/payment"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>Payment</span>
+              </a>
+            </li>
+            jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here
           </ul>
         </li>
         <li
@@ -97,7 +146,7 @@
                 <span>API</span>
               </a>
             </li>
-            <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+            jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here
           </ul>
         </li>
         <li
@@ -168,6 +217,130 @@
           </ul>
         </li>
       </ul>
-    </div>
+    </div> -->
+<!-- <button *ngIf="account !== null" (click)="logout()" type="button" class="btn btn-light" mdbRipple rippleColor="dark">Déconnexion</button>
   </div>
-</nav>
+</nav> -->
+
+<!--Main Navigation-->
+<header *ngIf="account !== null">
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar col-md-3 collapse bg-white">
+    <div>
+      <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+        <span class="logo-img"></span>
+      </a>
+    </div>
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a routerLink="/client" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+          <fa-icon icon="users"></fa-icon>&nbsp;
+          <span>Client</span>
+        </a>
+        <a routerLink="/compteur" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple">
+          <fa-icon icon="asterisk"></fa-icon>&nbsp;<span>Compteurs</span>
+        </a>
+        <a routerLink="/facture" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple"
+          ><fa-icon icon="asterisk"></fa-icon>&nbsp;<span>factures</span></a
+        >
+        <a routerLink="/payment" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple"
+          ><fa-icon icon="asterisk"></fa-icon>&nbsp;<span>Paiement</span></a
+        >
+        <a
+          routerLink="/admin/metrics"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          (click)="collapseNavbar()"
+        >
+          <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
+          <span>Métriques</span>
+        </a>
+        <a
+          class="list-group-item list-group-item-action py-2 ripple"
+          routerLink="/admin/health"
+          routerLinkActive="active"
+          (click)="collapseNavbar()"
+        >
+          <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
+          <span>Diagnostics</span>
+        </a>
+        <a
+          routerLink="/account/settings"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          data-cy="settings"
+        >
+          <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
+          <span>Profil</span>
+        </a>
+        <a routerLink="/account/password" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple">
+          <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
+          <span>Mot de passe</span>
+        </a>
+        <!-- <a 
+          routerLink="/user"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple">
+            <fa-icon icon="asterisk"></fa-icon>&nbsp;<span>user</span>
+          </a> -->
+        <!-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+            ><fa-icon icon="sync"></fa-icon><span>Orders</span></a
+          >
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+            ><fa-icon icon="sync"></fa-icon><span>International</span></a
+          >
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+            ><fa-icon icon="sync"></fa-icon><span>Partners</span></a
+          >
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+            ><fa-icon icon="sync"></fa-icon><span>Calendar</span></a
+          >
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+            ><fa-icon icon="sync"></fa-icon><span>Users</span></a
+          > -->
+        <!-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+            ><i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a
+          > -->
+      </div>
+    </div>
+    <button
+      *ngIf="account !== null"
+      (click)="logout()"
+      data-cy="entityConfirmDeleteButton"
+      type="submit"
+      class="btn btn-danger button-logout"
+    >
+      <fa-icon icon="times"></fa-icon>&nbsp;<span>Déconnexion</span>
+    </button>
+    <!-- <button *ngIf="account !== null" (click)="logout()" type="button" class="btn btn-secondary-theme button-logout" mdbRipple rippleColor="dark">Déconnexion</button> -->
+  </nav>
+  <!-- Sidebar -->
+
+  <!-- <div class="col-md-3"></div>
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white col-md-9 fixed-top">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+        <span class="logo-img"></span>
+        <span class="navbar-title">Formation</span>
+        <span class="navbar-version">{{ version }}</span>
+      </a>
+
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <button *ngIf="account !== null" (click)="logout()" type="button" class="btn btn-secondary-theme" mdbRipple rippleColor="dark">Déconnexion</button>
+      </ul>
+    </div>
+  </nav> -->
+  <!-- Navbar -->
+</header>
