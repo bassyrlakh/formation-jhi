@@ -81,4 +81,9 @@ public class CompteurServiceImpl implements CompteurService {
         log.debug("Request to delete Compteur : {}", id);
         compteurRepository.deleteById(id);
     }
+
+    @Override
+    public Page<CompteurDTO> findCompteursByNumero(String numero, Pageable p) {
+        return compteurRepository.findCompteursByNumero(numero, p).map(compteurMapper::toDto);
+    }
 }

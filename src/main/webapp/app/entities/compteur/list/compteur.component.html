@@ -3,6 +3,11 @@
     <span>Compteurs</span>
 
     <div class="d-flex justify-content-end">
+      <div class="row box-search">
+        <div class="col-lg3-md2">
+          <input type="text" #searchBox (keyup)="search(searchBox.value)" class="form-control" />
+        </div>
+      </div>
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
       </button>

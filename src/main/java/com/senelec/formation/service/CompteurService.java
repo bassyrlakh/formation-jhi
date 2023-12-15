@@ -55,4 +55,6 @@ public interface CompteurService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Page<CompteurDTO> findCompteursByNumero(String numero, Pageable p);
 }

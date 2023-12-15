@@ -2,9 +2,11 @@ package com.senelec.formation.web.rest;
 
 import com.senelec.formation.repository.CompteurRepository;
 import com.senelec.formation.service.CompteurService;
+import com.senelec.formation.service.dto.ClientDTO;
 import com.senelec.formation.service.dto.CompteurDTO;
 import com.senelec.formation.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -178,5 +181,21 @@ public class CompteurResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CompteurDTO>> getAllCompteursByNumero(
+        @RequestParam @NotBlank String query,
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get a page of Compteurs");
+        if (query.contains(" ")) {
+            throw new BadRequestAlertException("", "", "");
+        }
+        if (!query.isEmpty()) {
+            Page<CompteurDTO> page = compteurService.findCompteursByNumero(query, pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+            return ResponseEntity.ok().headers(headers).body(page.getContent());
+        } else return getAllCompteurs(pageable);
     }
 }

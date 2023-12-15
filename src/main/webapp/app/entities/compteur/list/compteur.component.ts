@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
-import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, debounceTime, distinctUntilChanged, filter, Observable, Subject, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
@@ -36,6 +36,8 @@ export class CompteurComponent implements OnInit {
   compteurs?: ICompteur[];
   isLoading = false;
 
+  queryTerms = new Subject<String>();
+
   predicate = 'id';
   ascending = true;
 
@@ -53,6 +55,7 @@ export class CompteurComponent implements OnInit {
   trackId = (_index: number, item: ICompteur): number => this.compteurService.getCompteurIdentifier(item);
 
   ngOnInit(): void {
+    this.loadSearch();
     this.load();
   }
 
@@ -78,6 +81,25 @@ export class CompteurComponent implements OnInit {
         this.onResponseSuccess(res);
       },
     });
+  }
+
+  loadSearch(): void {
+    this.loadListWithSearchValue()
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe({
+        next: (res: EntityArrayResponseType) => {
+          this.onResponseSuccess(res);
+        },
+      });
+  }
+
+  search(query: string) {
+    this.queryTerms.next(query);
+    //this.inputValue = query;
+  }
+
+  loadListWithSearchValue(): Observable<EntityArrayResponseType> {
+    return this.queryTerms.pipe(switchMap(term => this.compteurService.queryFromBack(term)));
   }
 
   navigateToWithComponentValues(): void {

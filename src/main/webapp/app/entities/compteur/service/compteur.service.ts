@@ -69,6 +69,12 @@ export class CompteurService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
+  queryFromBack(query: String): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<RestCompteur[]>(`${this.resourceUrl}/search?query=${query}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseArrayFromServer(res)));
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
